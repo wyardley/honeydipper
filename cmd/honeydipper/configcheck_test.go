@@ -18,6 +18,7 @@ import (
 )
 
 func TestRunConfigCheck(t *testing.T) {
+	t.Parallel()
 	runConfigTestCases := []interface{}{
 		[]interface{}{
 			&config.Config{
@@ -75,12 +76,16 @@ func TestRunConfigCheck(t *testing.T) {
 
 	for _, tcase := range runConfigTestCases {
 		tc := tcase.([]interface{})
-		result := runConfigCheck(tc[0].(*config.Config))
-		assert.Equal(t, tc[1], result, tc[2])
+		t.Run("configCheck", func(t *testing.T) {
+			t.Parallel()
+			result := runConfigCheck(tc[0].(*config.Config))
+			assert.Equal(t, tc[1], result, tc[2])
+		})
 	}
 }
 
 func TestCheckObjectExistsWorkFlowDoesNotExist(t *testing.T) {
+	t.Parallel()
 	defer recoverAssertion(`workflow "test-fail" not defined`, t)
 	workflows := map[string]config.Workflow{
 		"test-wf": {
@@ -91,6 +96,7 @@ func TestCheckObjectExistsWorkFlowDoesNotExist(t *testing.T) {
 }
 
 func TestCheckObjectExists(t *testing.T) {
+	t.Parallel()
 	defer recoverAssertion("", t)
 	workflows := map[string]config.Workflow{
 		"test-wf": {
@@ -101,6 +107,7 @@ func TestCheckObjectExists(t *testing.T) {
 }
 
 func TestCheckWorkflowDriverCallDriver(t *testing.T) {
+	t.Parallel()
 	defer recoverAssertion(`driver "test-driver" not defined`, t)
 	cfg := &config.Config{
 		Staged: &config.DataSet{
@@ -114,6 +121,7 @@ func TestCheckWorkflowDriverCallDriver(t *testing.T) {
 }
 
 func TestCheckWorkflowDriverFunctionDriver(t *testing.T) {
+	t.Parallel()
 	defer recoverAssertion(`driver "test-driver" not defined`, t)
 	cfg := &config.Config{
 		Staged: &config.DataSet{
@@ -177,12 +185,16 @@ var wfFunctionTestCases = []struct {
 }
 
 func TestCheckWorkflowFunctions(t *testing.T) {
+	t.Parallel()
 	for _, tc := range wfFunctionTestCases {
-		testCheckWorkflowFunctionHelper(t, tc.wf, tc.cfg, tc.out)
+		t.Run(tc.out, func(t *testing.T) {
+			testCheckWorkflowFunctionHelper(t, tc.wf, tc.cfg, tc.out)
+		})
 	}
 }
 
 func testCheckWorkflowFunctionHelper(t *testing.T, wf config.Workflow, cfg *config.Config, out string) {
+	t.Parallel()
 	defer recoverAssertion(out, t)
 	checkWorkflowFunction(wf, cfg)
 }
@@ -215,8 +227,12 @@ var wfActionTestCases = []struct {
 }
 
 func TestCheckWorkflowActions(t *testing.T) {
+	t.Parallel()
 	for _, tc := range wfActionTestCases {
-		testCheckWorkflowActionsHelper(t, tc.in, tc.out)
+		t.Run(tc.in.Name, func(t *testing.T) {
+			t.Parallel()
+			testCheckWorkflowActionsHelper(t, tc.in, tc.out)
+		})
 	}
 }
 
@@ -238,8 +254,12 @@ var wfConditionsTestCases = []struct {
 }
 
 func TestCheckWorkflowConditions(t *testing.T) {
+	t.Parallel()
 	for _, tc := range wfConditionsTestCases {
-		testCheckWorkflowConditionsHelper(t, tc.in, tc.out)
+		t.Run(tc.in.Name, func(t *testing.T) {
+			t.Parallel()
+			testCheckWorkflowConditionsHelper(t, tc.in, tc.out)
+		})
 	}
 }
 
@@ -249,16 +269,19 @@ func testCheckWorkflowConditionsHelper(t *testing.T, wf config.Workflow, out str
 }
 
 func TestCheckIsListString(t *testing.T) {
+	t.Parallel()
 	defer recoverAssertion(`field "test" must be a list or something interpolated into a list`, t)
 	checkIsList("test", "notList")
 }
 
 func TestCheckIsListMap(t *testing.T) {
+	t.Parallel()
 	defer recoverAssertion(`field "test" must be a list or something interpolated into a list`, t)
 	checkIsList("test", make(map[string]int))
 }
 
 func TestCheckIsListNil(t *testing.T) {
+	t.Parallel()
 	defer recoverAssertion("", t)
 	checkIsList("test", nil)
 }
@@ -276,11 +299,16 @@ var hasLiteralTestCases = []struct {
 }
 
 func TestHasLiteral(t *testing.T) {
+	t.Parallel()
 	for _, tc := range hasLiteralTestCases {
-		out := hasLiteral(tc.in)
-		if out != tc.out {
-			t.Errorf("Expected: %v, Got: %v instead", tc.out, out)
-		}
+		tc := tc
+		t.Run(tc.in, func(t *testing.T) {
+			t.Parallel()
+			out := hasLiteral(tc.in)
+			if out != tc.out {
+				t.Errorf("Expected: %v, Got: %v instead", tc.out, out)
+			}
+		})
 	}
 }
 
@@ -297,11 +325,16 @@ var hasInterpolationTestCases = []struct {
 }
 
 func TestHasInterpolation(t *testing.T) {
+	t.Parallel()
 	for _, tc := range hasInterpolationTestCases {
-		out := hasInterpolation(tc.in)
-		if out != tc.out {
-			t.Errorf("Expected: %v, Got: %v instead", tc.out, out)
-		}
+		tc := tc
+		t.Run(tc.in, func(t *testing.T) {
+			t.Parallel()
+			out := hasInterpolation(tc.in)
+			if out != tc.out {
+				t.Errorf("Expected: %v, Got: %v instead", tc.out, out)
+			}
+		})
 	}
 }
 

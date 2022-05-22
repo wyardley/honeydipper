@@ -112,6 +112,7 @@ data:
 }
 
 func TestDecryptAllWithLookUp(t *testing.T) {
+	t.Parallel()
 	doc := `
 data:
   item1: not encrypted

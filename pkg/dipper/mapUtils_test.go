@@ -88,16 +88,20 @@ func TestRecursive(t *testing.T) {
 	}
 
 	for i := 0; i < len(testCases); i++ {
-		testValue := testCases[i]
-		Recursive(testValue, process)
-		if reflect.ValueOf(testValue).Kind() == reflect.Ptr {
-			testValue = reflect.ValueOf(testValue).Elem().Interface()
-		}
-		assert.Equal(t, testExpects[i], testValue, "recursive test case %v failed", i)
+		i := i
+		t.Run("recursive", func(t *testing.T) {
+			testValue := testCases[i]
+			Recursive(testValue, process)
+			if reflect.ValueOf(testValue).Kind() == reflect.Ptr {
+				testValue = reflect.ValueOf(testValue).Elem().Interface()
+			}
+			assert.Equal(t, testExpects[i], testValue, "recursive test case %v failed", i)
+		})
 	}
 }
 
 func TestDeepCopyNil(t *testing.T) {
+	t.Parallel()
 	var ret interface{}
 	var err error
 	assert.NotPanics(t, func() { ret, err = DeepCopy(nil) })
@@ -106,6 +110,7 @@ func TestDeepCopyNil(t *testing.T) {
 }
 
 func TestDeepCopyNilMap(t *testing.T) {
+	t.Parallel()
 	var ret interface{}
 	var err error
 	assert.NotPanics(t, func() { ret, err = DeepCopyMap(nil) })
@@ -114,6 +119,7 @@ func TestDeepCopyNilMap(t *testing.T) {
 }
 
 func TestDeepCopy(t *testing.T) {
+	t.Parallel()
 	var ret interface{}
 	var err error
 	src := map[string]interface{}{
@@ -172,14 +178,16 @@ func TestMerge(t *testing.T) {
 			},
 		},
 	}
-	for _, c := range testCases {
-		d, _ := c["dst"].(map[string]interface{})
-		s := c["src"]
-		e := c["expect"]
-		n := c["name"]
+	for _, tc := range testCases {
+		t.Run("merge", func(t *testing.T) {
+			d, _ := tc["dst"].(map[string]interface{})
+			s := tc["src"]
+			e := tc["expect"]
+			n := tc["name"]
 
-		assert.NotPanics(t, func() { MergeMap(d, s) })
-		assert.Equal(t, e, d, n)
+			assert.NotPanics(t, func() { MergeMap(d, s) })
+			assert.Equal(t, e, d, n)
+		})
 	}
 }
 

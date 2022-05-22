@@ -33,6 +33,7 @@ func TestMain(m *testing.M) {
 }
 
 func TestIncrCmd(t *testing.T) {
+	t.Parallel()
 	ctrl := gomock.NewController(t)
 	_mockedstatsd := mock_driver.NewMockvirtualStatsd(ctrl)
 	dogstatsd = _mockedstatsd
@@ -54,6 +55,7 @@ func TestIncrCmd(t *testing.T) {
 }
 
 func TestGaugeCmd(t *testing.T) {
+	t.Parallel()
 	ctrl := gomock.NewController(t)
 	_mockedstatsd := mock_driver.NewMockvirtualStatsd(ctrl)
 	dogstatsd = _mockedstatsd

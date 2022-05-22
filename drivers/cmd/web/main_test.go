@@ -35,6 +35,7 @@ func TestMain(m *testing.M) {
 }
 
 func TestSendRequest(t *testing.T) {
+	t.Parallel()
 	defer gock.Off()
 
 	gock.New("http://example.com").
@@ -58,7 +59,7 @@ func TestSendRequest(t *testing.T) {
 	assert.Equal(t, "bar", mapKey, "JSON data miss-match")
 }
 
-func TestRecieveListJson(t *testing.T) {
+func TestReceiveListJson(t *testing.T) {
 	defer gock.Off()
 
 	gock.New("http://example.com").

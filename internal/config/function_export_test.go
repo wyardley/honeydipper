@@ -16,6 +16,7 @@ import (
 )
 
 func TestFunctionExport(t *testing.T) {
+	t.Parallel()
 	cfg := Config{
 		DataSet: &DataSet{
 			Systems: map[string]System{
@@ -72,6 +73,7 @@ func TestFunctionExport(t *testing.T) {
 }
 
 func TestFunctionExportWithParameters(t *testing.T) {
+	t.Parallel()
 	cfg := Config{
 		DataSet: &DataSet{
 			Systems: map[string]System{
@@ -127,6 +129,7 @@ func TestFunctionExportWithParameters(t *testing.T) {
 }
 
 func TestFunctionExportWithSquashedParameters(t *testing.T) {
+	t.Parallel()
 	cfg := Config{
 		DataSet: &DataSet{
 			Systems: map[string]System{
@@ -187,6 +190,7 @@ func TestFunctionExportWithSquashedParameters(t *testing.T) {
 }
 
 func TestFunctionExportWithSquashedSysData(t *testing.T) {
+	t.Parallel()
 	cfg := Config{
 		DataSet: &DataSet{
 			Systems: map[string]System{
@@ -240,6 +244,7 @@ func TestFunctionExportWithSquashedSysData(t *testing.T) {
 }
 
 func TestFunctionExportWithSubsystem(t *testing.T) {
+	t.Parallel()
 	cfg := &Config{
 		Staged: &DataSet{
 			Systems: map[string]System{
@@ -287,6 +292,7 @@ func TestFunctionExportWithSubsystem(t *testing.T) {
 }
 
 func TestFunctionExportWithSubsystemParameters(t *testing.T) {
+	t.Parallel()
 	cfg := &Config{
 		Staged: &DataSet{
 			Systems: map[string]System{
@@ -338,6 +344,7 @@ func TestFunctionExportWithSubsystemParameters(t *testing.T) {
 }
 
 func TestFunctionExportWithSubsystemParentData(t *testing.T) {
+	t.Parallel()
 	cfg := &Config{
 		Staged: &DataSet{
 			Systems: map[string]System{

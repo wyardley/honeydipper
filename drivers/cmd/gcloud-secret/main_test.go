@@ -30,6 +30,7 @@ func TestMain(m *testing.M) {
 }
 
 func TestLookupWithoutName(t *testing.T) {
+	t.Parallel()
 	driver = dipper.NewDriver(os.Args[1], "secretmanager")
 	ctrl := gomock.NewController(t)
 	client := mock_driver.NewMockSecretManagerClient(ctrl)
@@ -43,6 +44,7 @@ func TestLookupWithoutName(t *testing.T) {
 }
 
 func TestLookupWithName(t *testing.T) {
+	t.Parallel()
 	driver = dipper.NewDriver(os.Args[1], "secretmanager")
 	ctrl := gomock.NewController(t)
 	client := mock_driver.NewMockSecretManagerClient(ctrl)

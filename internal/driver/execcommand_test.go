@@ -31,6 +31,7 @@ func generateFakeExecCommand(fname string) func(string, ...string) *exec.Cmd {
 }
 
 func TestExecCommandDummy(t *testing.T) {
+	t.Parallel()
 	if os.Getenv("GO_WANT_HELPER_PROCESS") != "1" {
 		return
 	}

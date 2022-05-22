@@ -16,6 +16,7 @@ import (
 )
 
 func TestMessageCopy(t *testing.T) {
+	t.Parallel()
 	src := &Message{
 		Channel: "c1",
 		Subject: "s1",

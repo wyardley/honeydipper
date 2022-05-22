@@ -19,6 +19,7 @@ import (
 
 func TestDriverNewDriver(t *testing.T) {
 	// test new driver: table driven
+	t.Parallel()
 	testCases := map[string]interface{}{
 		"panic when driver name is missing": []interface{}{
 			map[string]interface{}{},              // driver meta
@@ -59,6 +60,7 @@ func TestDriverNewDriver(t *testing.T) {
 }
 
 func TestDriverStart(t *testing.T) {
+	t.Parallel()
 	testCases := map[string]interface{}{
 		"start a driver": []interface{}{ // case msg
 			&Runtime{ // runtime

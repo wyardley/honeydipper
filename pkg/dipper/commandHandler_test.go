@@ -20,6 +20,7 @@ import (
 )
 
 func TestCommandRetrySuccess(t *testing.T) {
+	t.Parallel()
 	b := bytes.Buffer{}
 	counter := 0
 
@@ -66,6 +67,7 @@ func TestCommandRetrySuccess(t *testing.T) {
 }
 
 func TestCommandRetryFailure(t *testing.T) {
+	t.Parallel()
 	b := bytes.Buffer{}
 	counter := 0
 
@@ -115,6 +117,7 @@ func TestCommandRetryFailure(t *testing.T) {
 }
 
 func TestCommandRetryRougueFunction(t *testing.T) {
+	t.Parallel()
 	b := bytes.Buffer{}
 	counter := 0
 

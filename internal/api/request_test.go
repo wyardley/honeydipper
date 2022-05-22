@@ -121,26 +121,32 @@ func requestTest(t *testing.T, caseName string) (*Store, *RequestTestCase) {
 }
 
 func TestTypeAllAPI(t *testing.T) {
+	t.Parallel()
 	requestTest(t, "TypeAllAPI")
 }
 
 func TestTypeFirstAPI(t *testing.T) {
+	t.Parallel()
 	requestTest(t, "TypeFirstAPI")
 }
 
 func TestTypeMatchAPI(t *testing.T) {
+	t.Parallel()
 	requestTest(t, "TypeMatchAPI")
 }
 
 func TestTypeMatchAPINoMatch(t *testing.T) {
+	t.Parallel()
 	requestTest(t, "TypeMatchAPINoMatch")
 }
 
 func TestTypeAllAPITimeout(t *testing.T) {
+	t.Parallel()
 	requestTest(t, "TypeAllAPITimeout")
 }
 
 func TestTypeMatchAPILongRequest(t *testing.T) {
+	t.Parallel()
 	l, c := requestTest(t, "TypeMatchAPILongRequest")
 
 	ctrl := gomock.NewController(t)
@@ -155,5 +161,6 @@ func TestTypeMatchAPILongRequest(t *testing.T) {
 }
 
 func TestUnauthorizedAPI(t *testing.T) {
+	t.Parallel()
 	requestTest(t, "UnauthorizedAPI")
 }

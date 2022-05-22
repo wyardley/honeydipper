@@ -18,6 +18,7 @@ import (
 )
 
 func TestConfigGetDriverData(t *testing.T) {
+	t.Parallel()
 	mockdata := map[string]interface{}{
 		"test1": "string1",
 		"test2": map[string]interface{}{
@@ -48,6 +49,7 @@ func TestConfigGetDriverData(t *testing.T) {
 }
 
 func TestRegexParsing(t *testing.T) {
+	t.Parallel()
 	config := &Config{
 		Staged: &DataSet{
 			Workflows: map[string]Workflow{

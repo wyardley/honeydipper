@@ -17,6 +17,7 @@ import (
 )
 
 func TestCompare(t *testing.T) {
+	t.Parallel()
 	assert.True(t, Compare("test value1", "test value1"), "Simple string compare should match the same string")
 	assert.False(t, Compare("test value1", "test value2"), "Simple string compare should find diff between strings")
 
@@ -30,6 +31,7 @@ func TestCompare(t *testing.T) {
 }
 
 func TestCompareAllStr(t *testing.T) {
+	t.Parallel()
 	assert.True(t, CompareAll("test value1", "test value1"), "Simple string compare should match the same string")
 	assert.False(t, CompareAll("test value1", "test value2"), "Simple string compare should find diff between strings")
 
@@ -43,6 +45,7 @@ func TestCompareAllStr(t *testing.T) {
 }
 
 func TestCompareAllList(t *testing.T) {
+	t.Parallel()
 	assert.True(t, CompareAll([]interface{}{"dsf", "wrong", "test value1"}, "test value1"), "List match one string")
 	assert.False(t, CompareAll([]interface{}{"dsf", "wrong", "test value1"}, "test value2"), "List match no string")
 
@@ -61,6 +64,7 @@ func TestCompareAllList(t *testing.T) {
 }
 
 func TestCompareAllMap(t *testing.T) {
+	t.Parallel()
 	assert.True(t, CompareAll(map[string]interface{}{"key1": "val1", "key2": "val2"}, map[string]interface{}{"key1": "val1"}), "map key/value matches key/condition")
 	assert.False(t, CompareAll(map[string]interface{}{"key1": "val1", "key2": "val2"}, map[string]interface{}{"key1": "val0"}), "map key/value mismatches key/condition")
 	assert.True(t, CompareAll(map[string]interface{}{"key1": "val1", "key2": "val2"}, map[string]interface{}{"key1": "val1", "key2": "val2"}), "map all key/value matches key/condition")

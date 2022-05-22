@@ -38,6 +38,7 @@ func TestMain(m *testing.M) {
 }
 
 func TestExtractEvent(t *testing.T) {
+	t.Parallel()
 	var eventData map[string]interface{}
 	var server *http.Server
 	var waitgroup sync.WaitGroup
@@ -73,6 +74,7 @@ func TestExtractEvent(t *testing.T) {
 }
 
 func TestVerifySignature(t *testing.T) {
+	t.Parallel()
 	result := verifySignature(
 		"X-Hub-Signature-256",
 		"sha256=00",
@@ -150,6 +152,7 @@ func (m *mockResponseWriter) Header() http.Header {
 }
 
 func TestHookHandler(t *testing.T) {
+	t.Parallel()
 	sysMap = map[string]map[string]interface{}{
 		"sys-missing-secret": {
 			"signatureHeader": "x-pagerduty-signature",

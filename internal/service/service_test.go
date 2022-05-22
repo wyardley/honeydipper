@@ -23,6 +23,7 @@ import (
 )
 
 func TestServiceLoopCatchError(t *testing.T) {
+	t.Parallel()
 	if dipper.Logger == nil {
 		f, _ := os.OpenFile(os.DevNull, os.O_APPEND, 0o777)
 		defer f.Close()
@@ -152,6 +153,7 @@ func TestServiceLoopCatchError(t *testing.T) {
 }
 
 func TestServiceRemoveEmitter(t *testing.T) {
+	t.Parallel()
 	if dipper.Logger == nil {
 		f, _ := os.OpenFile(os.DevNull, os.O_APPEND, 0o777)
 		defer f.Close()
@@ -251,6 +253,7 @@ func TestServiceRemoveEmitter(t *testing.T) {
 }
 
 func TestServiceEmitterCrashing(t *testing.T) {
+	t.Parallel()
 	if dipper.Logger == nil {
 		f, _ := os.OpenFile(os.DevNull, os.O_APPEND, 0o777)
 		defer f.Close()

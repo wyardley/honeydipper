@@ -17,6 +17,7 @@ import (
 )
 
 func TestNewBuiltinDriver(t *testing.T) {
+	t.Parallel()
 	m := &Meta{
 		Name: "test",
 		Type: "test",
@@ -27,6 +28,7 @@ func TestNewBuiltinDriver(t *testing.T) {
 }
 
 func TestBuiltinAcquire(t *testing.T) {
+	t.Parallel()
 	// test builtin acquire: table driven
 	BuiltinPath = "test_fixtures/"
 
@@ -73,6 +75,7 @@ func TestBuiltinAcquire(t *testing.T) {
 }
 
 func TestBuiltinPrepare(t *testing.T) {
+	t.Parallel()
 	// test builtin prepare: table driven
 
 	testCases := map[string]interface{}{

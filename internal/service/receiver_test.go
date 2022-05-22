@@ -14,7 +14,9 @@ import (
 )
 
 func TestReceiverFeatures(t *testing.T) {
+	t.Parallel()
 }
 
 func TestReceiverRoute(t *testing.T) {
+	t.Parallel()
 }

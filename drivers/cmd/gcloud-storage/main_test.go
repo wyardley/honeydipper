@@ -35,6 +35,7 @@ func TestMain(m *testing.M) {
 }
 
 func TestListBuckets(t *testing.T) {
+	t.Parallel()
 	ctrl := gomock.NewController(t)
 	defer ctrl.Finish()
 
@@ -66,6 +67,7 @@ func TestListBuckets(t *testing.T) {
 }
 
 func TestListFiles(t *testing.T) {
+	t.Parallel()
 	ctrl := gomock.NewController(t)
 	defer ctrl.Finish()
 
